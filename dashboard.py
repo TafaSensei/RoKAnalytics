@@ -100,16 +100,13 @@ if selected == "DashBoard":
         - Download the excel template            
         - Fill only 300 players
         - Do not change the number format!
-        
-        """
-    temp_link = 'https://github.com/TafaSensei/RoKAnalytics/blob/main/template_data.xlsx'
+        - Template Link = 'https://rb.gy/cgzq36'
 
+        """
     ### --- LOAD DATAFRAME
     col1, col2 = st.columns(2)
     with col1:
         st.info(temp_DESC)
-        if st.button("Download Excel Template"):
-            webbrowser.open(temp_link)
     with col2:
         uploaded_file = st.file_uploader("", type=['xlsx'])
 
