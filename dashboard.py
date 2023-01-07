@@ -109,7 +109,7 @@ if selected == "DashBoard":
     with col1:
         st.info(temp_DESC)
         if st.button("Download Excel Template"):
-            webbrowser.open_new_tab(temp_link)
+            webbrowser.open(temp_link)
     with col2:
         uploaded_file = st.file_uploader("", type=['xlsx'])
 
