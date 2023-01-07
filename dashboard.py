@@ -9,6 +9,8 @@ from PIL import Image
 import numpy as np
 from streamlit_option_menu import option_menu
 import hydralit_components as hc
+import webbrowser
+import streamlit.components.v1 as components
 
 THIS_DIR = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 IMAGES_DIR = THIS_DIR / "images"
@@ -19,9 +21,18 @@ def load_css_file(css_file_path):
     with open(css_file_path) as f:
         return st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-st.set_page_config(page_title="RoK Analytics", layout="wide")
+st.set_page_config(page_title=" 🎯 RoK Analytics", layout="wide")
 
 load_css_file(CSS_FILE)
+
+col1,col2,col3 = st.columns([20,60,20])
+with col1:
+    st.subheader("")
+with col2:
+    st.title(" 🏛️ Welcome Mighty Governors 🏛️ ")
+    st.markdown("##")
+with col3:
+    st.subheader("")
 
 selected = option_menu(
                         menu_title=None,
@@ -31,17 +42,7 @@ selected = option_menu(
                         orientation="horizontal",
 )
 
-
 if selected == "HomePage":
-
-    col1,col2,col3 = st.columns([20,60,20])
-    with col1:
-        st.subheader("")
-    with col2:
-        st.title(" 🏛️ Welcome Mighty Leaders 🏛️ ")
-        st.markdown("##")
-    with col3:
-        st.subheader("")
 
     PRODUCT_TAGLINE = "Ready To Visualize KvK Performance? 🚀"
     PRODUCT_DESCRIPTION = """
@@ -64,7 +65,10 @@ if selected == "HomePage":
     - Build your new strategy
 
 
-    **This is your new superpower; upgrade your leadership to a new level!!**
+    **This is your new superpower; upgrade your kingdom to a new level!!**
+
+    Dashboard is free!! If you are happy with your data visualization journey,             
+    you can support me! 🫶
     """
     sun_DESC = """
         
@@ -76,7 +80,12 @@ if selected == "HomePage":
     col1, col2,col3 = st.columns([50,10,45])
     with col1:
         st.subheader(PRODUCT_TAGLINE)
-        st.write(PRODUCT_DESCRIPTION)                 
+        st.write(PRODUCT_DESCRIPTION)
+        components.html(
+            """
+            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="TafaSensei" data-color="#FF5F5F" data-emoji="🎁"  data-font="Cookie" data-text="Buy me a Gold Chest" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+            """
+        )               
     with col2:
         st.subheader("")
     with col3:
@@ -86,11 +95,21 @@ if selected == "HomePage":
 
 if selected == "DashBoard":
 
+    temp_DESC = """
+        
+        - Download the excel template            
+        - Fill only 300 players
+        - Do not change the number format!
+        
+        """
+    temp_link = 'https://github.com/TafaSensei/RoKAnalytics/blob/main/template_data.xlsx'
+
     ### --- LOAD DATAFRAME
     col1, col2 = st.columns(2)
     with col1:
-    #Add file uploader to allow users to upload excel
-        st.subheader("")
+        st.info(temp_DESC)
+        if st.button("Download Excel Template"):
+            webbrowser.open_new_tab(temp_link)
     with col2:
         uploaded_file = st.file_uploader("", type=['xlsx'])
 
