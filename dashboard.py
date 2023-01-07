@@ -90,24 +90,9 @@ if selected == "DashBoard":
     col1, col2 = st.columns(2)
     with col1:
     #Add file uploader to allow users to upload excel
-        uploaded_file = st.file_uploader("", type=['xlsx'])
-    with col2:
         st.subheader("")
-        with st.expander("You can see the template as below:"):
-            st.write("- Top 300 Players")
-            st.write("- Headers are critical!!!")
-            st.write("")
-            upload_image = Image.open(IMAGES_DIR / "upload_temp.png")
-            st.image(upload_image)
-    
-    hide = """
-    <style>
-    ul.streamlit-expander {
-        border: 0 !important;
-    </style>
-    """
-
-    st.markdown(hide, unsafe_allow_html=True)
+    with col2:
+        uploaded_file = st.file_uploader("", type=['xlsx'])
 
     if uploaded_file:
         df = pd.read_excel(uploaded_file, engine='openpyxl')
