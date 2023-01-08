@@ -597,5 +597,5 @@ if selected == "Contact":
         product_image = Image.open(IMAGES_DIR / "post_box.jpg")
         st.image(product_image)
     
-    st.info("*Also open for recommendations! Just send an e-mail 👆 Constructive critism is always acceptable :)")
+    st.info("*Also open for recommendations! Just send an e-mail 👆 Constructive criticism is always acceptable :)")
 
