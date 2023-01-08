@@ -66,9 +66,6 @@ if selected == "HomePage":
 
 
     **This is your new superpower; upgrade your kingdom to a new level!!**
-
-    Dashboard is free!! If you are happy with your data visualization journey,             
-    you can support me! 🫶
     """
     sun_DESC = """
         
@@ -80,12 +77,7 @@ if selected == "HomePage":
     col1, col2,col3 = st.columns([50,10,45])
     with col1:
         st.subheader(PRODUCT_TAGLINE)
-        st.write(PRODUCT_DESCRIPTION)
-        components.html(
-            """
-            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="TafaSensei" data-color="#FF5F5F" data-emoji="🎁"  data-font="Cookie" data-text="Buy me a Gold Chest" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
-            """
-        )               
+        st.write(PRODUCT_DESCRIPTION)           
     with col2:
         st.subheader("")
     with col3:
@@ -547,6 +539,13 @@ if selected == "DashBoard":
             with col2:
                 st.plotly_chart(fig_dead_label,use_container_width=True)
         
+            st.info( "If you are happy with your data visualization journey, you can support me! 🫶")
+            components.html(
+                """
+                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="TafaSensei" data-color="#FF5F5F" data-emoji="🎁"  data-font="Cookie" data-text="Buy me a Gold Chest" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
+                """
+            )
+
 if selected == "Contact":
 
     col1, col2,col3 = st.columns([0.4,1.2,0.4])
