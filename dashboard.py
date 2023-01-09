@@ -407,7 +407,7 @@ if selected == "DashBoard":
             fig_kills_label = px.funnel(df_grouped_kills, 
                                         x='#_of_players', 
                                         y='kills_Label',
-                                        title='Kills Distribution (#)',
+                                        title='Number of Killers vs Kill Range',
                                         height=450, 
                                         width=700, 
                                         color_discrete_sequence=['#F67280'])
@@ -417,18 +417,18 @@ if selected == "DashBoard":
             fig_kills_label.update_layout(margin=dict(t=70, b=30, l=70, r=40),
                                     xaxis_title=' ', yaxis_title=" ",
                                     plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                                    title_font=dict(size=20, color='#222A2A', family="Lato, sans-serif"),
+                                    title_font=dict(size=16, color='#222A2A', family="Lato, sans-serif"),
                                     font=dict(color='#222A2A'))
 
-            col1, col2, col3 = st.columns([0.3,1.4,0.3])
+            col1, col2, col3 = st.columns([30,10,60])
 
             with col1:
-                st.subheader(" ")
+                howto_image = Image.open(IMAGES_DIR / "howto.png")
+                st.image(howto_image, width=450)
             with col2:
-                st.plotly_chart(fig_kills_label,use_container_width=True)
-                st.info(" 💡 You can easily see how many players have how many kills according to kills range! ")
+                st.subheader("")
             with col3:
-                st.subheader(" ")
+                st.plotly_chart(fig_kills_label,use_container_width=True)
 
             #Waterfall Chart
 
@@ -450,12 +450,12 @@ if selected == "DashBoard":
             fig_t5_label.update_xaxes(showgrid=False)
             fig_t5_label.update_yaxes(showgrid=False, visible=False)
             fig_t5_label.update_traces(hovertemplate=None)
-            fig_t5_label.update_layout(title='t5 Killers Distribution (#)',
+            fig_t5_label.update_layout(title='Number of T5 Killers vs Kill Range',
                             margin=dict(t=100, b=50, l=100, r=70),
                             hovermode="x unified",
                             xaxis_title=' ', yaxis_title=" ",
                             plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',# Transparent background
-                            title_font=dict(size=20, color='#222A2A', family="Lato, sans-serif"),
+                            title_font=dict(size=16, color='#222A2A', family="Lato, sans-serif"),
                             font=dict(color='#222A2A'))
 
             df_grouped_t4=df.groupby(by=['t4_Label']).count()[['Username']]
@@ -476,12 +476,12 @@ if selected == "DashBoard":
             fig_t4_label.update_xaxes(showgrid=False)
             fig_t4_label.update_yaxes(showgrid=False, visible=False)
             fig_t4_label.update_traces(hovertemplate=None)
-            fig_t4_label.update_layout(title='t4 Killers Distribution (#)',
+            fig_t4_label.update_layout(title='Number of T4 Killers vs Kill Range',
                             margin=dict(t=100, b=50, l=100, r=70),
                             hovermode="x unified",
                             xaxis_title=' ', yaxis_title=" ",
                             plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',# Transparent background
-                            title_font=dict(size=20, color='#222A2A', family="Lato, sans-serif"),
+                            title_font=dict(size=16, color='#222A2A', family="Lato, sans-serif"),
                             font=dict(color='#222A2A'))
 
             col_1, col_2 = st.columns([1, 1])
@@ -502,7 +502,7 @@ if selected == "DashBoard":
 
             fig_donut_deads.update_layout(margin=dict(t=70, b=30, l=0, r=0), showlegend=True,
                                     plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                                    title_font=dict(size=20, color='#222A2A', family="Lato, sans-serif"),
+                                    title_font=dict(size=18, color='#222A2A', family="Lato, sans-serif"),
                                     font=dict(size=13, color='#222A2A'),
                                     legend=dict(orientation="h", font=dict(size=11)),
                                     annotations=[dict(text='<b>Deads</b>', x=0.5, y=0.5,  
@@ -519,7 +519,7 @@ if selected == "DashBoard":
             fig_dead_label = px.funnel(df_grouped_deads, 
                                         x='#_of_players', 
                                         y='Deads_Label',
-                                        title='Deads Distribution (#)',
+                                        title='Number of Players vs Deads Range',
                                         height=450, 
                                         width=600, 
                                         color_discrete_sequence=['#348781'])
@@ -529,7 +529,7 @@ if selected == "DashBoard":
             fig_dead_label.update_layout(margin=dict(t=70, b=20, l=40, r=0),
                                     xaxis_title=' ', yaxis_title=" ",
                                     plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                                    title_font=dict(size=22, color='#222A2A', family="Lato, sans-serif"),
+                                    title_font=dict(size=18, color='#222A2A', family="Lato, sans-serif"),
                                     font=dict(color='#222A2A'))
 
             col1, col2 = st.columns([1,1])
