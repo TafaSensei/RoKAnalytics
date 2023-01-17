@@ -135,11 +135,11 @@ if selected == "DashBoard":
 
         df_pmin = int((np.percentile(df['Power'], 0)//5000000)*5000000)
         df_p25 = int((np.percentile(df['Power'], 25)//5000000)*5000000)
-        df_p50 = int((np.percentile(df['Power'], 50)//5000000)*5000000)
-        df_p60 = int((np.percentile(df['Power'], 60)//5000000)*5000000)
+        df_p50 = int((np.percentile(df['Power'], 40)//5000000)*5000000)
+        df_p60 = int((np.percentile(df['Power'], 50)//5000000)*5000000)
         df_p70 = int((np.percentile(df['Power'], 70)//5000000)*5000000)
         df_p80 = int((np.percentile(df['Power'], 80)//5000000)*5000000)
-        df_p90 = int((np.percentile(df['Power'], 90)//5000000)*5000000)
+        df_p90 = int((np.percentile(df['Power'], 95)//5000000)*5000000)
 
         #concatenation example
         l_min = str(human_format(df_pmin)) + '-' + str(human_format(df_p25))
