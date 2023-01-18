@@ -418,10 +418,10 @@ if selected == "DashBoard":
                 - Min (0%)
                 - 15%th percentile
                 - 30%th percentile
-                - 50%th percentile (median)
-                - 70%th percentile
-                - 85%th percentile
-                - 95%th percentile
+                - 45%th percentile
+                - 60%th percentile
+                - 75%th percentile
+                - 90%th percentile
             """
             col1, col2, col3 = st.columns([10,45,35])
             with col1:
