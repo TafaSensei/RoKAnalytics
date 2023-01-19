@@ -24,14 +24,7 @@ st.set_page_config(page_title=" 🎯 RoK Analytics", layout="wide")
 
 load_css_file(CSS_FILE)
 
-col1,col2,col3 = st.columns([30,40,30])
-with col1:
-    st.subheader("")
-with col2:
-    st.title(" 🏛️ Welcome Mighty Governors 🏛️ ")
-    st.markdown("##")
-with col3:
-    st.subheader("")
+st.markdown("<h1 style='text-align: center; color: black;'>🏛️ Welcome Mighty Governors 🏛️ </h1>", unsafe_allow_html=True)
 
 selected = option_menu(
                         menu_title=None,
@@ -58,10 +51,10 @@ if selected == "HomePage":
     - Prepare your data (Δkills, Δdeads, exclude cheaters)
     - Go to dashboard tab
     - Upload your data (apply template)
-    - An awesome & informative dashboard will welcome you nicely
+    - An awesome & informative charts will welcome you nicely 🎯
     - Check your results in detail
-    - Define deadweight
-    - Build your new strategy
+    - Monitor & Comparison tab is for players 🙌
+    - In detailed statistics, leadership can find a good system to define deadweights 🤫
 
 
     **This is your new superpower; upgrade your kingdom to a new level!!**
@@ -81,7 +74,7 @@ if selected == "HomePage":
         st.subheader("")
     with col3:
         sun_image = Image.open(IMAGES_DIR / "sun_tzu.png")
-        st.image(sun_image, width=550)
+        st.image(sun_image, width=500)
         st.write(sun_DESC)
 
 if selected == "DashBoard":
@@ -381,6 +374,8 @@ if selected == "DashBoard":
             with cc[3]:
             #customise the the theming for a neutral content
                 hc.info_card(title='Players:',content=sum_number, bar_value=90,theme_override=theme_neutral2)
+            
+            st.title("")
 
         #Donut Chart
 
@@ -530,7 +525,7 @@ if selected == "DashBoard":
                             font=dict(color='#222A2A'))
 
             with st.container():
-                mygrid = make_grid(5,13)
+                mygrid = make_grid(5,9)
                 st.markdown("""
                                 <style>
                                 div[data-testid="metric-container"] {
@@ -545,15 +540,15 @@ if selected == "DashBoard":
                                 """
                                 , unsafe_allow_html=True)
                 
-                mygrid[0][6].metric("Averages 🎪","")
-                mygrid[1][5].metric("Kills ⚔️",df_avg_kills)
-                mygrid[1][7].metric("Deads ☠️",df_avg_dead)
-                mygrid[1][4].metric(label="T5 Kills ⚔️",value="",delta=df_avg_t5)
-                mygrid[2][4].metric(label="T4 Kills ⚔️",value="",delta=df_avg_t4)
-                mygrid[3][2].plotly_chart(fig_Avg_kills)
-                mygrid[3][7].plotly_chart(fig_Avg_deads)
-                mygrid[4][1].plotly_chart(fig_Avg_t5s)
-                mygrid[4][4].plotly_chart(fig_Avg_t4s)
+                mygrid[0][4].metric("Averages 🎪","")
+                mygrid[1][3].metric("Kills ⚔️",df_avg_kills)
+                mygrid[1][5].metric("Deads ☠️",df_avg_dead)
+                mygrid[1][2].metric(label="T5 Kills ⚔️",value="",delta=df_avg_t5)
+                mygrid[2][2].metric(label="T4 Kills ⚔️",value="",delta=df_avg_t4)
+                mygrid[3][0].plotly_chart(fig_Avg_kills)
+                mygrid[3][5].plotly_chart(fig_Avg_deads)
+                mygrid[4][0].plotly_chart(fig_Avg_t5s)
+                mygrid[4][3].plotly_chart(fig_Avg_t4s)
 
         with tab2:
         #Kills Donut Chart
@@ -617,19 +612,16 @@ if selected == "DashBoard":
                                                             color="slateblue"), showarrow=False)])
 
             #Combine t5 & t4 in a row
-            col1, col2,col3,col4 = st.columns([7,40,20,15])
-
+            col1, col2,col3 = st.columns([45,30,5])
             with col1:
-                st.subheader("")
-            with col2:
                 st.subheader("")
                 st.success(" 💡 Kills Distribution by Power Label ")
                 st.subheader(" ")
                 st.plotly_chart(fig_donut_kills)
-            with col3:
+            with col2:
                 st.plotly_chart(fig_donut_kills_t5,use_container_width=True)
                 st.plotly_chart(fig_donut_kills_t4,use_container_width=True)
-            with col4:
+            with col3:
                 st.subheader("")
 
             st.title("")
@@ -644,9 +636,9 @@ if selected == "DashBoard":
             fig_kills_label = px.funnel(df_grouped_kills, 
                                         x='#_of_players', 
                                         y='kills_Label',
-                                        title='Number of Killers vs Kill Range',
+                                        title='<b>'+'Number of Killers vs Kill Range'+'</b>',
                                         height=450, 
-                                        width=700, 
+                                        width=650, 
                                         color_discrete_sequence=['#F67280'])
 
             fig_kills_label.update_xaxes(showgrid=False, ticksuffix=' ', showline=True)
@@ -677,9 +669,9 @@ if selected == "DashBoard":
             fig_t5_label.update_xaxes(showgrid=False)
             fig_t5_label.update_yaxes(showgrid=False, visible=False)
             fig_t5_label.update_traces(hovertemplate=None)
-            fig_t5_label.update_layout(title='Number of T5 Killers vs Kill Range',
-                            margin=dict(t=100, b=50, l=100, r=70),
-                            width=600, height=450,
+            fig_t5_label.update_layout(title='<b>'+'Number of T5 Killers vs Kill Range'+'</b>',
+                            margin=dict(t=50, b=50, l=0, r=0),
+                            width=500, height=500,
                             hovermode="x unified",
                             xaxis_title=' ', yaxis_title=" ",
                             plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',# Transparent background
@@ -704,9 +696,9 @@ if selected == "DashBoard":
             fig_t4_label.update_xaxes(showgrid=False)
             fig_t4_label.update_yaxes(showgrid=False, visible=False)
             fig_t4_label.update_traces(hovertemplate=None)
-            fig_t4_label.update_layout(title='Number of T4 Killers vs Kill Range',
-                            margin=dict(t=100, b=50, l=100, r=70),
-                            width=600, height=450,
+            fig_t4_label.update_layout(title='<b>'+'Number of T4 Killers vs Kill Range'+'</b>',
+                            margin=dict(t=50, b=50, l=0, r=0),
+                            width=500, height=500,
                             hovermode="x unified",
                             xaxis_title=' ', yaxis_title=" ",
                             plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',# Transparent background
@@ -716,11 +708,11 @@ if selected == "DashBoard":
             with st.container():
                 howto_image = Image.open(IMAGES_DIR / "howto.png")
 
-                mygrid = make_grid(3,9)
-                mygrid[0][1].image(howto_image, width=500)
-                mygrid[0][4].plotly_chart(fig_kills_label)            
-                mygrid[2][0].plotly_chart(fig_t5_label)
-                mygrid[2][4].plotly_chart(fig_t4_label)
+                mygrid = make_grid(5,6)
+                mygrid[0][0].image(howto_image, width=500)
+                mygrid[0][3].plotly_chart(fig_kills_label)            
+                mygrid[3][0].plotly_chart(fig_t5_label)
+                mygrid[3][3].plotly_chart(fig_t4_label)
 
         with tab3:
             
@@ -728,7 +720,7 @@ if selected == "DashBoard":
 
             fig_donut_deads = px.pie(df_kills_power, hole=0.5,
                                 values= 'dead',
-                                title='Deads Distribution by Power Label',
+                                title='<b>'+'Deads Distribution by Power Label'+'</b>',
                                 names= 'Power_Label')
 
             fig_donut_deads.update_traces(textposition='inside', textinfo='percent', rotation=90,
@@ -753,28 +745,23 @@ if selected == "DashBoard":
             fig_dead_label = px.funnel(df_grouped_deads, 
                                         x='#_of_players', 
                                         y='Deads_Label',
-                                        title='Number of Players vs Deads Range',
+                                        title='<b>'+'Number of Players vs Deads Range'+'</b>',
                                         height=450, 
-                                        width=600, 
+                                        width=700, 
                                         color_discrete_sequence=['#348781'])
 
             fig_dead_label.update_xaxes(showgrid=False, ticksuffix=' ', showline=True)
             fig_dead_label.update_traces(marker=dict(line=dict(width=4,color='white')))
-            fig_dead_label.update_layout(margin=dict(t=70, b=20, l=80, r=0),
+            fig_dead_label.update_layout(margin=dict(t=50, b=0, l=68, r=0),
                                     xaxis_title=' ', yaxis_title=" ",
                                     plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                                     title_font=dict(size=17, color='#222A2A', family="Lato, sans-serif"),
                                     font=dict(color='#222A2A'))
 
-            col1, col2,col3,col4 = st.columns([3,20,3,25])
-
+            col1, col2 = st.columns([51,50])
             with col1:
-                st.subheader("")
-            with col2:
                 st.plotly_chart(fig_donut_deads,use_container_width=True)
-            with col3:
-                st.subheader("")
-            with col4:
+            with col2:
                 st.plotly_chart(fig_dead_label,use_container_width=True)
 
         with tab4:
@@ -786,7 +773,7 @@ if selected == "DashBoard":
                         grid[i] = st.columns(rows)
                 return grid
             
-            col1, col2, col3, col4,col5 = st.columns([12,21,33,21,13])
+            col1, col2, col3, col4,col5 = st.columns([6,21,34,20,18])
 
             with col1:
                 st.header(" ")
@@ -1025,7 +1012,7 @@ if selected == "DashBoard":
             )
 
             with st.container():
-                mygrid = make_grid(3,11)
+                mygrid = make_grid(3,9)
                 st.markdown("""
                                 <style>
                                 div[data-testid="metric-container"] {
@@ -1039,21 +1026,21 @@ if selected == "DashBoard":
                                 </style>
                                 """
                                 , unsafe_allow_html=True)
-                mygrid[0][2].metric("Power 🔱",human_format2(user_power),user_power_l)
+                mygrid[0][1].metric("Power 🔱",human_format2(user_power),user_power_l)
                 mygrid[1][1].metric("Kills ⚔️",human_format2(user_kills))
-                mygrid[1][3].metric("Deads ☠️",human_format2(user_dead))
+                mygrid[1][2].metric("Deads ☠️",human_format2(user_dead))
                 mygrid[1][0].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_kills*100))
                 mygrid[2][0].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_kills_power*100))
-                mygrid[1][4].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_dead*100))
-                mygrid[2][4].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_dead_power*100))
+                mygrid[1][3].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_dead*100))
+                mygrid[2][3].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_dead_power*100))
 
-                mygrid[0][8].metric("Power 🔱",human_format2(user_power1),user_power_l1)
-                mygrid[1][7].metric("Kills ⚔️",human_format2(user_kills1))
-                mygrid[1][9].metric("Deads ☠️",human_format2(user_dead1))
-                mygrid[1][6].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_kills1*100))
-                mygrid[2][6].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_kills_power1*100))
-                mygrid[1][10].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_dead1*100))
-                mygrid[2][10].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_dead_power1*100))
+                mygrid[0][6].metric("Power 🔱",human_format2(user_power1),user_power_l1)
+                mygrid[1][6].metric("Kills ⚔️",human_format2(user_kills1))
+                mygrid[1][7].metric("Deads ☠️",human_format2(user_dead1))
+                mygrid[1][5].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_kills1*100))
+                mygrid[2][5].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_kills_power1*100))
+                mygrid[1][8].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_dead1*100))
+                mygrid[2][8].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_dead_power1*100))
 
             notation_DESC = """
 
@@ -1062,13 +1049,13 @@ if selected == "DashBoard":
                 """
 
             with st.container():
-                col1,col2,col3 = st.columns([24,31,20])
+                col1,col2,col3 = st.columns([18,6,79])
                 with col1:
                     st.success(notation_DESC)
                 with col2:
-                    st.plotly_chart(per_mon)
-                with col3:
                     st.subheader("")
+                with col3:
+                    st.plotly_chart(per_mon)
 
             with st.container():
                 hide = """
@@ -1083,43 +1070,43 @@ if selected == "DashBoard":
 
                     st.title("")
 
-                    mygrid2 = make_grid(6,11)
+                    mygrid2 = make_grid(6,9)
                     mygrid2[0][1].metric("T5 Kills ⚔️",human_format2(user_t5kills))
-                    mygrid2[0][3].metric("T4 Kills ⚔️",human_format2(user_t4kills))
+                    mygrid2[0][2].metric("T4 Kills ⚔️",human_format2(user_t4kills))
                     mygrid2[0][0].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_t5kills*100))
                     mygrid2[1][0].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_t5kills_power*100))
-                    mygrid2[0][4].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_t4kills*100))
-                    mygrid2[1][4].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_t4kills_power*100))
+                    mygrid2[0][3].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_t4kills*100))
+                    mygrid2[1][3].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_t4kills_power*100))
 
-                    mygrid2[0][7].metric("T5 Kills ⚔️",human_format2(user_t5kills1))
-                    mygrid2[0][9].metric("T4 Kills ⚔️",human_format2(user_t4kills1))
-                    mygrid2[0][6].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_t5kills1*100))
-                    mygrid2[1][6].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_t5kills_power1*100))
-                    mygrid2[0][10].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_t4kills1*100))
-                    mygrid2[1][10].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_t4kills_power1*100))
+                    mygrid2[0][6].metric("T5 Kills ⚔️",human_format2(user_t5kills1))
+                    mygrid2[0][7].metric("T4 Kills ⚔️",human_format2(user_t4kills1))
+                    mygrid2[0][5].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_t5kills1*100))
+                    mygrid2[1][5].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_t5kills_power1*100))
+                    mygrid2[0][8].metric(label="ΔKingdom ⛳️",value="",delta='{:.1f}%'.format(diff_t4kills1*100))
+                    mygrid2[1][8].metric(label="ΔPower Label 🎳",value="",delta='{:.1f}%'.format(diff_t4kills_power1*100))
 
-                    mygrid2[2][2].metric(label="**% of Performance**", value="")
-                    mygrid2[2][8].metric(label="**% of Performance**", value="")
+                    mygrid2[2][1].metric(label="**% of Performance**", value="")
+                    mygrid2[2][6].metric(label="**% of Performance**", value="")
 
                     mygrid2[3][0].metric(label="T5 % - KD",value="",delta='{:.1f}%'.format(t5_p*100))
-                    mygrid2[3][4].metric(label="T5 % - PL",value="",delta='{:.1f}%'.format(t5_p_l*100))
+                    mygrid2[3][3].metric(label="T5 % - PL",value="",delta='{:.1f}%'.format(t5_p_l*100))
                     mygrid2[4][0].metric(label="T4 % - KD",value="",delta='{:.1f}%'.format(t4_p*100))
-                    mygrid2[4][4].metric(label="T4 % - PL",value="",delta='{:.1f}%'.format(t4_p_l*100))
+                    mygrid2[4][3].metric(label="T4 % - PL",value="",delta='{:.1f}%'.format(t4_p_l*100))
                     mygrid2[3][1].metric(label="Dead % - KD",value="",delta='{:.1f}%'.format(dead_p*100))
-                    mygrid2[3][3].metric(label="Dead % - PL",value="",delta='{:.1f}%'.format(dead_p_l*100))
-                    mygrid2[4][1].metric("KD Score",'{:.2f}%'.format(kd_p*100))
-                    mygrid2[4][3].metric("PL Score",'{:.2f}%'.format(label_p*100))
-                    mygrid2[5][2].metric("Performance Point",'{:.2f}%'.format(pp_p*100))
+                    mygrid2[3][2].metric(label="Dead % - PL",value="",delta='{:.1f}%'.format(dead_p_l*100))
+                    mygrid2[4][1].metric("KD Score",'{:.1f}%'.format(kd_p*100))
+                    mygrid2[4][2].metric("PL Score",'{:.1f}%'.format(label_p*100))
+                    mygrid2[5][2].metric("Performance Point",'{:.1f}%'.format(pp_p*100))
 
-                    mygrid2[3][6].metric(label="T5 % - KD",value="",delta='{:.1f}%'.format(t5_p1*100))
-                    mygrid2[3][10].metric(label="T5 % - PL",value="",delta='{:.1f}%'.format(t5_p_l1*100))
-                    mygrid2[4][6].metric(label="T4 % - KD",value="",delta='{:.1f}%'.format(t4_p1*100))
-                    mygrid2[4][10].metric(label="T4 % - PL",value="",delta='{:.1f}%'.format(t4_p_l1*100))
-                    mygrid2[3][7].metric(label="Dead % - KD",value="",delta='{:.1f}%'.format(dead_p1*100))
-                    mygrid2[3][9].metric(label="Dead % - PL",value="",delta='{:.1f}%'.format(dead_p_l1*100))
-                    mygrid2[4][7].metric("KD Score",'{:.2f}%'.format(kd_p1*100))
-                    mygrid2[4][9].metric("PL Score",'{:.2f}%'.format(label_p1*100))
-                    mygrid2[5][8].metric("Performance Point",'{:.2f}%'.format(pp_p1*100))
+                    mygrid2[3][5].metric(label="T5 % - KD",value="",delta='{:.1f}%'.format(t5_p1*100))
+                    mygrid2[3][8].metric(label="T5 % - PL",value="",delta='{:.1f}%'.format(t5_p_l1*100))
+                    mygrid2[4][5].metric(label="T4 % - KD",value="",delta='{:.1f}%'.format(t4_p1*100))
+                    mygrid2[4][8].metric(label="T4 % - PL",value="",delta='{:.1f}%'.format(t4_p_l1*100))
+                    mygrid2[3][6].metric(label="Dead % - KD",value="",delta='{:.1f}%'.format(dead_p1*100))
+                    mygrid2[3][7].metric(label="Dead % - PL",value="",delta='{:.1f}%'.format(dead_p_l1*100))
+                    mygrid2[4][6].metric("KD Score",'{:.1f}%'.format(kd_p1*100))
+                    mygrid2[4][7].metric("PL Score",'{:.1f}%'.format(label_p1*100))
+                    mygrid2[5][6].metric("Performance Point",'{:.1f}%'.format(pp_p1*100))
 
                     st.title("")
 
@@ -1138,7 +1125,7 @@ if selected == "DashBoard":
                         """
 
                     with st.container():
-                        col1,col2,col3 = st.columns([30,32,38])
+                        col1,col2,col3 = st.columns([36,50,14])
                         with col1:
                             st.success(notation_DESC1)
                         with col2:
