@@ -94,6 +94,7 @@ if selected == "RoK Analytics":
         - Download the excel template            
         - Fill only 300 players
         - Do not change the number format!
+        - Do not leave empty cells who has Username!
         - Template Link = 'https://rb.gy/cgzq36'
 
         """
