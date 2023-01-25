@@ -32,8 +32,6 @@ with col3:
     st.subheader("")
     st.subheader("")
     st.title("🏛️ Welcome Mighty Governors 🏛️")
-    
-#st.markdown("<h1 style='text-align: center; color: black;'>🏛️ Welcome Mighty Governors 🏛️ </h1>", unsafe_allow_html=True)
 
 selected = option_menu(
                         menu_title=None,
