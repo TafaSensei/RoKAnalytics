@@ -147,10 +147,10 @@ if selected == "RoK Analytics":
         df_pmin = int((np.percentile(df['Power'], 0)//5000000)*5000000)
         df_p25 = int((np.percentile(df['Power'], 15)//5000000)*5000000)
         df_p50 = int((np.percentile(df['Power'], 30)//5000000)*5000000)
-        df_p60 = int((np.percentile(df['Power'], 45)//5000000)*5000000)
-        df_p70 = int((np.percentile(df['Power'], 60)//5000000)*5000000)
-        df_p80 = int((np.percentile(df['Power'], 75)//5000000)*5000000)
-        df_p90 = int((np.percentile(df['Power'], 90)//5000000)*5000000)
+        df_p60 = int((np.percentile(df['Power'], 60)//5000000)*5000000)
+        df_p70 = int((np.percentile(df['Power'], 75)//5000000)*5000000)
+        df_p80 = int((np.percentile(df['Power'], 85)//5000000)*5000000)
+        df_p90 = int((np.percentile(df['Power'], 95)//5000000)*5000000)
 
         #concatenation example
         l_min = str(human_format(df_pmin)) + '-' + str(human_format(df_p25))
@@ -433,10 +433,10 @@ if selected == "RoK Analytics":
                     - Min (0%)
                     - 15%th percentile
                     - 30%th percentile
-                    - 45%th percentile
                     - 60%th percentile
                     - 75%th percentile
-                    - 90%th percentile
+                    - 85%th percentile
+                    - 95%th percentile
                 """
                 col1, col2, col3 = st.columns([10,45,35])
                 with col1:
